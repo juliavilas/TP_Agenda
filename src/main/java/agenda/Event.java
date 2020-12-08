@@ -34,13 +34,54 @@ public class Event {
     }
 
     /**
+     * Calcule la date et l'heure de fin de l'événement
+     * @return la date et l'heure de fin de l'événement
+     */
+    public LocalDateTime getFinishDateTime(){
+        LocalDateTime finishDateTime = myStart;
+        long myMinutes = myStart.toLocalTime().getMinute() + myDuration.toMinutes();
+        long myHours = myStart.toLocalTime().getHour();
+        long myDays = 0;
+        System.out.println("minutes non régularisées = " + myMinutes);
+        while (myMinutes >= 60){
+            myMinutes -= 60;
+            myHours ++;
+        }
+        
+            System.out.println("minutes régularisées = " + myMinutes);
+            System.out.println("heure non régularisées = " + myHours);
+        while (myHours >= 24){
+            myHours -= 24;
+            myDays++;
+        }
+        System.out.println("heures régularisées = " + myHours);
+        System.out.println("jours = " + myDays);
+        
+        finishDateTime.plusDays(myDays);
+        finishDateTime.withHour((int)myHours);
+        finishDateTime.withMinute((int)myMinutes);
+       
+        System.out.println(finishDateTime);
+        return finishDateTime;
+        
+        // !!! La date de fin n'est pas correctement incrémentée
+    }
+    
+    /**
      * Tests if an event occurs on a given day
      *
      * @param aDay the day to test
      * @return true if the event occurs on that day, false otherwise
      */
     public boolean isInDay(LocalDate aDay) {
-        return aDay.isEqual(myStart.toLocalDate());
+        boolean inDay = false;
+        if(aDay.isEqual(myStart.toLocalDate()) || aDay.isEqual(this.getFinishDateTime().toLocalDate())){
+            inDay = true;
+        }
+        else if(aDay.isAfter(myStart.toLocalDate()) && aDay.isBefore(this.getFinishDateTime().toLocalDate())){
+            inDay = true;
+        }
+        return inDay;
     }
    
     /**
@@ -65,6 +106,5 @@ public class Event {
         return myDuration;
     }
 
-   
     
 }
