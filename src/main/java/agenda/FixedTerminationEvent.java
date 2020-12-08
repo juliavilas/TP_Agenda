@@ -11,7 +11,9 @@ import java.time.temporal.ChronoUnit;
  */
 public class FixedTerminationEvent extends RepetitiveEvent {
 
-    
+    private LocalDate terminationInclusive;
+    private long numberOfOccurrences;
+
     /**
      * Constructs a fixed terminationInclusive event ending at a given date
      *
@@ -27,10 +29,8 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @param terminationInclusive the date when this event ends
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, LocalDate terminationInclusive) {
-         super(title, start, duration, frequency);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
-
+        super(title, start, duration, frequency);
+        this.terminationInclusive = terminationInclusive;
     }
 
     /**
@@ -45,12 +45,12 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * <LI>ChronoUnit.WEEKS for weekly repetitions</LI>
      * <LI>ChronoUnit.MONTHS for monthly repetitions</LI>
      * </UL>
-     * @param numberOfOccurrences the number of occurrences of this repetitive event
+     * @param numberOfOccurrences the number of occurrences of this repetitive
+     * event
      */
     public FixedTerminationEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency, long numberOfOccurrences) {
         super(title, start, duration, frequency);
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        this.numberOfOccurrences = numberOfOccurrences;
     }
 
     /**
@@ -58,13 +58,13 @@ public class FixedTerminationEvent extends RepetitiveEvent {
      * @return the termination date of this repetitive event
      */
     public LocalDate getTerminationDate() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");   
+        // Il faudrait ajouter à la date de départ la multiplication de la fréquence par le nombre d'occurrences
+        LocalDate terminationDate = this.getStart().plus(numberOfOccurrences-1, frequency).toLocalDate();
+        return terminationDate;
     }
 
     public long getNumberOfOccurrences() {
-        // TODO : implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        return numberOfOccurrences;
     }
-        
+
 }
