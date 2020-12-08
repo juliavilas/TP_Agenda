@@ -29,10 +29,10 @@ public class RepetitiveEvent extends Event {
         this.frequency=frequency;
         LocalDateTime nextStart = start.plus(1, frequency);
         int i = 0;
-        while(i < 366){
-            RepetitiveEvent nextEvent = new RepetitiveEvent(title,nextStart,duration,frequency);
-            i++;
-        }
+//        while(i < 366){
+//            RepetitiveEvent nextEvent = new RepetitiveEvent(title,nextStart,duration,frequency);
+//            i++;
+//        }
     }
     
     
