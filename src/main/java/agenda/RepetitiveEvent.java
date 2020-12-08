@@ -23,10 +23,19 @@ public class RepetitiveEvent extends Event {
      * <LI>ChronoUnit.MONTHS for monthly repetitions</LI>
      * </UL>
      */
+    
     public RepetitiveEvent(String title, LocalDateTime start, Duration duration, ChronoUnit frequency) {
         super(title, start, duration);
         this.frequency=frequency;
+        LocalDateTime nextStart = start.plus(1, frequency);
+        int i = 0;
+        while(i < 366){
+            RepetitiveEvent nextEvent = new RepetitiveEvent(title,nextStart,duration,frequency);
+            i++;
+        }
     }
+    
+    
 
    
            
@@ -37,8 +46,7 @@ public class RepetitiveEvent extends Event {
      */
     public void addException(LocalDate date){
         if(this.isInDay(date)){
-            this.setMyStart(this.getStart().plus(1,frequency));
-            this.setMyStart(date.plus(1, frequency).atTime(LocalTime.MIN));
+            throw new UnsupportedOperationException("Pas encore implémenté");
         }
     }
 
