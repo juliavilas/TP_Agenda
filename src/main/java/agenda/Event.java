@@ -62,6 +62,8 @@ public class Event {
         finishDateTime.withMinute((int)myMinutes);
        
         System.out.println(finishDateTime);
+
+//        finishDateTime.plus(myDuration.);
         return finishDateTime;
         
         // !!! La date de fin n'est pas correctement incrémentée
@@ -106,5 +108,9 @@ public class Event {
         return myDuration;
     }
 
+    @Override
+    public String toString(){
+        return "Event title : " + this.getTitle();
+    }
     
 }
