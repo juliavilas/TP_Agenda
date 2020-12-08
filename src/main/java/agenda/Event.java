@@ -33,15 +33,6 @@ public class Event {
         this.myStart = start;
         this.myDuration = duration;
     }
-
-//    /**
-//     * Calcule la date et l'heure de fin de l'événement
-//     * @return la date et l'heure de fin de l'événement
-//     */
-//    public LocalDateTime getFinishDateTime(){
-//        LocalDateTime finishDateTime = myStart;
-//        return finishDateTime.plus(myDuration);
-//    }
     
     /**
      * Tests if an event occurs on a given day
