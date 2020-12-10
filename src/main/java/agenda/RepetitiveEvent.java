@@ -35,6 +35,21 @@ public class RepetitiveEvent extends Event {
 //        }
     }
     
+    @Override
+    public boolean isInDay(LocalDate date){
+        LocalDateTime closestStart = this.getStart();
+        while(closestStart.toLocalDate().isBefore(date)){
+            closestStart = closestStart.plus(1, frequency);
+        }
+        LocalDateTime myFinish = closestStart.plus(this.getDuration());
+        if(date.isEqual(closestStart.toLocalDate()) || date.isEqual(myFinish.toLocalDate())){
+            return true;
+        }
+        else if(date.isAfter(closestStart.toLocalDate()) && date.isBefore(myFinish.toLocalDate())){
+            return true;
+        }
+        return false;
+    }
     
 
    
