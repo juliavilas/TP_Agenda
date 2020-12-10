@@ -63,7 +63,7 @@ public class FixedTerminationEvent extends RepetitiveEvent {
     }
 
     public long getNumberOfOccurrences() {
-        long numberOfOccurrences = this.numberOfOccurrences = this.getFrequency().between(this.getStart().toLocalDate(), terminationInclusive)+1;
+        this.numberOfOccurrences = this.getFrequency().between(this.getStart().toLocalDate(), terminationInclusive)+1;
         return numberOfOccurrences;
     }
 
