@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 public class RepetitiveEvent extends Event {
     
     protected ChronoUnit frequency;
+    private ArrayList<LocalDate> exceptions = new ArrayList<>();
     /**
      * Constructs a repetitive event
      *
@@ -37,6 +38,9 @@ public class RepetitiveEvent extends Event {
     
     @Override
     public boolean isInDay(LocalDate date){
+        if(exceptions.contains(date)){
+            return false;
+        }
         LocalDateTime closestStart = this.getStart();
         while(closestStart.toLocalDate().isBefore(date)){
             closestStart = closestStart.plus(1, frequency);
@@ -60,9 +64,7 @@ public class RepetitiveEvent extends Event {
      * @param date the event will not occur at this date
      */
     public void addException(LocalDate date){
-        if(this.isInDay(date)){
-            throw new UnsupportedOperationException("Pas encore implémenté");
-        }
+        exceptions.add(date);
     }
 
     /**
